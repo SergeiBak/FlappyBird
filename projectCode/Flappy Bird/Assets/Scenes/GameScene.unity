@@ -1201,6 +1201,8 @@ MonoBehaviour:
   playButton: {fileID: 891049228}
   gameOver: {fileID: 1690803074}
   scoreBoard: {fileID: 1667163421}
+  scoreBoardScore: {fileID: 393609000}
+  scoreBoardHighScore: {fileID: 409460640}
 --- !u!4 &1675701428
 Transform:
   m_ObjectHideFlags: 0

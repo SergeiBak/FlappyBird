@@ -14,8 +14,13 @@ public class GameController : MonoBehaviour
     private GameObject playButton;
     [SerializeField]
     private GameObject gameOver;
+
     [SerializeField]
     private GameObject scoreBoard;
+    [SerializeField]
+    private Text scoreBoardScore;
+    [SerializeField]
+    private Text scoreBoardHighScore;
 
     private int score;
 
@@ -25,6 +30,8 @@ public class GameController : MonoBehaviour
 
         gameOver.SetActive(false);
         scoreBoard.SetActive(false);
+
+        SetupStats();
     }
 
     public void Play()
@@ -55,6 +62,15 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        scoreBoardScore.text = score.ToString();
+
+        if (score > PlayerPrefs.GetInt("FlappyHighScore"))
+        {
+            PlayerPrefs.SetInt("FlappyHighScore", score);
+        }
+
+        scoreBoardHighScore.text = PlayerPrefs.GetInt("FlappyHighScore").ToString();
+
         gameOver.SetActive(true);
         playButton.SetActive(true);
         scoreBoard.SetActive(true);
@@ -66,5 +82,13 @@ public class GameController : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+    }
+
+    void SetupStats()
+    {
+        if (!PlayerPrefs.HasKey("FlappyHighScore"))
+        {
+            PlayerPrefs.SetInt("FlappyHighScore", 0);
+        }
     }
 }

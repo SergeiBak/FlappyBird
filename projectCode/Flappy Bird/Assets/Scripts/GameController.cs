@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
     private Text scoreBoardScore;
     [SerializeField]
     private Text scoreBoardHighScore;
+    [SerializeField]
+    private GameObject newScore;
 
     [SerializeField]
     private GameObject bronzeMedal;
@@ -98,6 +100,11 @@ public class GameController : MonoBehaviour
         if (score > PlayerPrefs.GetInt("FlappyHighScore"))
         {
             PlayerPrefs.SetInt("FlappyHighScore", score);
+            newScore.SetActive(true);
+        }
+        else
+        {
+            newScore.SetActive(false);
         }
 
         scoreBoardHighScore.text = PlayerPrefs.GetInt("FlappyHighScore").ToString();

@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject newScore;
 
+    private int score;
+
     [SerializeField]
     private GameObject bronzeMedal;
     [SerializeField]
@@ -44,7 +46,27 @@ public class GameController : MonoBehaviour
 
     bool muteMusic;
 
-    private int score;
+    [SerializeField]
+    private AudioSource audSource;
+    [SerializeField]
+    private AudioSource hitSource;
+    [SerializeField]
+    private AudioSource musicSource;
+
+    [SerializeField]
+    private AudioClip scoreSound;
+    [SerializeField]
+    private AudioClip hitSound;
+    [SerializeField]
+    private AudioClip gameOverSound;
+    [SerializeField]
+    private AudioClip wingSound;
+    [SerializeField]
+    private AudioClip buttonSound;
+
+    [SerializeField]
+    private float delaySoundTime = 0.05f;
+
 
     private void Awake()
     {
@@ -90,6 +112,8 @@ public class GameController : MonoBehaviour
         {
             Destroy(pipes[i].gameObject);
         }
+        
+        PlayButtonSound();
     }
 
     public void Pause()
@@ -100,6 +124,9 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        PlayHitSound();
+        PlayGameOverSound();
+
         scoreBoardScore.text = score.ToString();
 
         if (score > PlayerPrefs.GetInt("FlappyHighScore"))
@@ -127,6 +154,7 @@ public class GameController : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+        PlayScoreSound();
     }
 
     void SetupMedals()
@@ -207,5 +235,32 @@ public class GameController : MonoBehaviour
             soundOnIcon.enabled = false;
             soundOffIcon.enabled = true;
         }
+    }
+
+    void PlayScoreSound()
+    {
+        audSource.PlayOneShot(scoreSound, 1f);
+    }
+
+    void PlayHitSound()
+    {
+        audSource.PlayOneShot(hitSound, 1f);
+    }
+
+    public void PlayWingSound()
+    {
+        hitSource.pitch = Random.Range(0.9f, 1.1f);
+        hitSource.PlayOneShot(wingSound, 1f);
+    }
+
+    public void PlayGameOverSound()
+    {
+        audSource.clip = gameOverSound;
+        audSource.PlayDelayed(delaySoundTime);
+    }
+
+    public void PlayButtonSound()
+    {
+        audSource.PlayOneShot(buttonSound, 1f);
     }
 }

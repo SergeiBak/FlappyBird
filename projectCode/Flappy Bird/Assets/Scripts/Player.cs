@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) // Keyboard / mouse input
         {
             direction = Vector3.up * strength;
+            gm.PlayWingSound();
         }
 
         if (Input.touchCount > 0)   // mobile / touchscreen input
@@ -91,6 +92,7 @@ public class Player : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 direction = Vector3.up * strength;
+                gm.PlayWingSound();
             }
         }
 

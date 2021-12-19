@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour
     private GameObject gameOver;
 
     [SerializeField]
+    private GameObject startScreen;
+
+    [SerializeField]
     private GameObject scoreBoard;
     [SerializeField]
     private Text scoreBoardScore;
@@ -49,6 +52,7 @@ public class GameController : MonoBehaviour
 
         gameOver.SetActive(false);
         scoreBoard.SetActive(false);
+        startScreen.SetActive(true);
 
         SetupStats();
 
@@ -75,6 +79,7 @@ public class GameController : MonoBehaviour
         playButton.SetActive(false);
         gameOver.SetActive(false);
         scoreBoard.SetActive(false);
+        startScreen.SetActive(false);
 
         Time.timeScale = 1;
         player.enabled = true;

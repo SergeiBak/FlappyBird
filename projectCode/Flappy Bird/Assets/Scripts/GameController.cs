@@ -14,12 +14,17 @@ public class GameController : MonoBehaviour
     private GameObject playButton;
     [SerializeField]
     private GameObject gameOver;
+    [SerializeField]
+    private GameObject scoreBoard;
 
     private int score;
 
     private void Awake()
     {
         Pause();
+
+        gameOver.SetActive(false);
+        scoreBoard.SetActive(false);
     }
 
     public void Play()
@@ -29,6 +34,7 @@ public class GameController : MonoBehaviour
 
         playButton.SetActive(false);
         gameOver.SetActive(false);
+        scoreBoard.SetActive(false);
 
         Time.timeScale = 1;
         player.enabled = true;
@@ -51,6 +57,7 @@ public class GameController : MonoBehaviour
     {
         gameOver.SetActive(true);
         playButton.SetActive(true);
+        scoreBoard.SetActive(true);
 
         Pause();
     }

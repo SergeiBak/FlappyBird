@@ -22,6 +22,13 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Text scoreBoardHighScore;
 
+    [SerializeField]
+    Image soundOnIcon;
+    [SerializeField]
+    Image soundOffIcon;
+
+    bool muteMusic;
+
     private int score;
 
     private void Awake()
@@ -32,6 +39,20 @@ public class GameController : MonoBehaviour
         scoreBoard.SetActive(false);
 
         SetupStats();
+
+        if (PlayerPrefs.GetInt("FlappyMute") == 1)
+        {
+            AudioListener.volume = 0;
+            AudioListener.pause = true;
+            muteMusic = true;
+        }
+        else
+        {
+            AudioListener.volume = 1;
+            AudioListener.pause = false;
+            muteMusic = false;
+        }
+        UpdateMuteIcon();
     }
 
     public void Play()
@@ -89,6 +110,44 @@ public class GameController : MonoBehaviour
         if (!PlayerPrefs.HasKey("FlappyHighScore"))
         {
             PlayerPrefs.SetInt("FlappyHighScore", 0);
+        }
+        if (!PlayerPrefs.HasKey("FlappyMute"))
+        {
+            PlayerPrefs.SetInt("FlappyMute", 0);
+        }
+    }
+
+    public void ToggleMute()
+    {
+        if (!muteMusic)
+        {
+            muteMusic = true;
+            AudioListener.volume = 0;
+            AudioListener.pause = true;
+            PlayerPrefs.SetInt("FlappyMute", 1);
+        }
+        else
+        {
+            muteMusic = false;
+            AudioListener.volume = 1;
+            AudioListener.pause = false;
+            PlayerPrefs.SetInt("FlappyMute", 0);
+        }
+
+        UpdateMuteIcon();
+    }
+
+    void UpdateMuteIcon()
+    {
+        if (!muteMusic)
+        {
+            soundOnIcon.enabled = true;
+            soundOffIcon.enabled = false;
+        }
+        else
+        {
+            soundOnIcon.enabled = false;
+            soundOffIcon.enabled = true;
         }
     }
 }

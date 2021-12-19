@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private SpriteRenderer sr;
+    [SerializeField]
+    private Sprite[] sprites;
+    private int spriteIndex;
+
     private Vector3 direction;
     [SerializeField]
     private float gravity = -9.8f;
@@ -11,9 +16,14 @@ public class Player : MonoBehaviour
     private float strength = 5f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(AnimateBird), .15f, .15f);
     }
 
     // Update is called once per frame
@@ -36,5 +46,17 @@ public class Player : MonoBehaviour
 
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
+    }
+
+    private void AnimateBird()
+    {
+        spriteIndex++;
+
+        if (spriteIndex >= sprites.Length)
+        {
+            spriteIndex = 0;
+        }
+
+        sr.sprite = sprites[spriteIndex];
     }
 }

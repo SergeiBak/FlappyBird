@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Parallax.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
+    <Compile Include="Assets\Scripts\Pipes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

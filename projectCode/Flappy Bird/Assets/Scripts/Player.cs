@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer sr;
     [SerializeField]
     private Sprite[] sprites;
+    [SerializeField]
+    private Sprite[] redSprites;
     private int spriteIndex;
 
     private Vector3 direction;
@@ -25,6 +27,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float checkDelay = 0.1f;
 
+    bool redBird = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,7 +40,15 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(AnimateBird), .15f, .15f);
+        SelectColor();
+        if (redBird)
+        {
+            InvokeRepeating(nameof(AnimateRedBird), .15f, .15f);
+        }
+        else
+        {
+            InvokeRepeating(nameof(AnimateBird), .15f, .15f);
+        }
     }
 
     private void OnEnable()
@@ -46,6 +58,22 @@ public class Player : MonoBehaviour
         transform.position = position;
 
         direction = Vector3.zero;
+
+        SelectColor();
+        if (redBird)
+        {
+            InvokeRepeating(nameof(AnimateRedBird), .15f, .15f);
+        }
+        else
+        {
+            InvokeRepeating(nameof(AnimateBird), .15f, .15f);
+        }
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke(nameof(AnimateBird));
+        CancelInvoke(nameof(AnimateRedBird));
     }
 
     // Update is called once per frame
@@ -112,6 +140,32 @@ public class Player : MonoBehaviour
         }
 
         sr.sprite = sprites[spriteIndex];
+    }
+
+    private void AnimateRedBird()
+    {
+        spriteIndex++;
+
+        if (spriteIndex >= redSprites.Length)
+        {
+            spriteIndex = 0;
+        }
+
+        sr.sprite = redSprites[spriteIndex];
+    }
+
+    public void SelectColor()
+    {
+        int color = Random.Range(0, 2);
+
+        if (color == 0)
+        {
+            redBird = false;
+        }
+        else
+        {
+            redBird = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

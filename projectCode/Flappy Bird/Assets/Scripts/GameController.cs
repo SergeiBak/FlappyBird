@@ -23,6 +23,16 @@ public class GameController : MonoBehaviour
     private Text scoreBoardHighScore;
 
     [SerializeField]
+    private GameObject bronzeMedal;
+    [SerializeField]
+    private GameObject silverMedal;
+    [SerializeField]
+    private GameObject goldMedal;
+    [SerializeField]
+    private GameObject platinumMedal;
+
+
+    [SerializeField]
     Image soundOnIcon;
     [SerializeField]
     Image soundOffIcon;
@@ -96,6 +106,8 @@ public class GameController : MonoBehaviour
         playButton.SetActive(true);
         scoreBoard.SetActive(true);
 
+        SetupMedals();
+
         Pause();
     }
 
@@ -103,6 +115,40 @@ public class GameController : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+    }
+
+    void SetupMedals()
+    {
+        ClearMedals();
+
+        if (score < 10)
+        {
+            return;
+        }
+        else if (score >= 10 && score < 20)
+        {
+            bronzeMedal.SetActive(true);
+        }
+        else if (score >= 20 && score < 30)
+        {
+            silverMedal.SetActive(true);
+        }
+        else if (score >= 30 && score < 40)
+        {
+            goldMedal.SetActive(true);
+        }
+        else if (score >= 40)
+        {
+            platinumMedal.SetActive(true);
+        }
+    }
+
+    void ClearMedals()
+    {
+        bronzeMedal.SetActive(false);
+        silverMedal.SetActive(false);
+        goldMedal.SetActive(false);
+        platinumMedal.SetActive(false);
     }
 
     void SetupStats()

@@ -16,7 +16,7 @@ part of my minigames series where I utilize various resources to remake simple g
 Flappy Bird consists of a simple scrolling level in which the player can tap to make the bird jump up from its fall. The goal of the game is to get the highest score possible by avoiding hitting the ground & pipes. For each pipe passed, the player gets a point added to their score!
 
 ## Test The Project!
-In order to play this version of Flappy Bird, follow the [link](https://sergeibak.github.io/PersonalWebsite/tetris.html) to a in-browser WebGL build (No download required!).
+In order to play this version of Flappy Bird, follow the [link](https://sergeibak.github.io/PersonalWebsite/FlappyBird.html) to a in-browser WebGL build (No download required!).
 
 ## Code
 A brief description of all of the classes is as follows:

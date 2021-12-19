@@ -617,7 +617,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 891049231}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1675701427}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &891049231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +866,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba656fcf288f5cd4dad7f6e736923932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 813432440}
+  scoreText: {fileID: 840100673}
+  playButton: {fileID: 891049228}
+  gameOver: {fileID: 1690803074}
 --- !u!4 &1675701428
 Transform:
   m_ObjectHideFlags: 0

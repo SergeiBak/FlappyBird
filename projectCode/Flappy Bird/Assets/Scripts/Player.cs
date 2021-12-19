@@ -15,10 +15,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float strength = 5f;
 
+    private GameController gm;
+
     // Start is called before the first frame update
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        gm = FindObjectOfType<GameController>();
     }
 
     private void Start()
@@ -58,5 +61,17 @@ public class Player : MonoBehaviour
         }
 
         sr.sprite = sprites[spriteIndex];
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            gm.GameOver();
+        }
+        else if (collision.gameObject.tag == "Scoring")
+        {
+            gm.IncreaseScore();
+        }
     }
 }
